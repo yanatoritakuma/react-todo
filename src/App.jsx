@@ -6,21 +6,32 @@ export const App = () => {
   const [incompleteTodo, setIncompleteTodo] = useState(['あああ', 'いいい']);
   const [completeTodo, setCompleteTodo] = useState(['ううう']);
   const onChangeTodoText = (event) => setTodoText(event.target.value);
+  const onClickAdd = () => {
+    if (todoText === '') return;
+    const newTodo = [...incompleteTodo, todoText];
+    setIncompleteTodo(newTodo);
+    setTodoText('');
+  };
+  const onClickDelete = (index) => {
+    const newTodo = [...incompleteTodo];
+    newTodo.splice(index, 1);
+    setIncompleteTodo(newTodo);
+  };
  return (
    <>
    <div className="input-area">
      <input placeholder="TODOを入力" value={todoText} onChange={onChangeTodoText} />
-     <button>追加</button>
+     <button onClick={onClickAdd}>追加</button>
    </div>
    <div className="incomplete-area">
     <p className="title">未完了リスト</p>
     <ul>
-      {incompleteTodo.map((todo) => {
+      {incompleteTodo.map((todo, index) => {
         return (
         <div key={todo} className="list-row">
           <li>{todo}</li>
           <button>完成</button>
-          <button>削除</button>
+          <button onClick={ () => onClickDelete(index)}>削除</button>
         </div>
         );
       })}
