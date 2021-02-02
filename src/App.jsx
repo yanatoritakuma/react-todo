@@ -37,6 +37,7 @@ export const App = () => {
     setIncompleteTodo(newIncompleteTodo);
   };
   
+  
  return (
    <>
    <div className="input-area">
